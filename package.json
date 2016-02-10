@@ -1,7 +1,7 @@
 {
   "name": "json-struct",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "Simple tool to validate JSON structures",
   "main": "index.js",
   "scripts": {
     "test": "node test"
