@@ -1,6 +1,6 @@
 ## Install
 ```
-npm i js-struct --save
+npm i json-struct --save
 ```
 
 ## Example
