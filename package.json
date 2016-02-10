@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node test"
   },
+  "license": "MIT",
   "author": "Wells Johnston <wells@littlstar.com>",
   "dependencies": {
     "traverse": "^0.6.6"
