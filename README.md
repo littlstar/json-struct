@@ -8,64 +8,58 @@ npm i json-struct --save
 const Schema = require('json-struct');
 
 /* a json structure to test */
-const test = {
-  one: 'one',
+const testObject = {
+  one: 'hello world',
   two: {
-    two: 'two',
     three: {
-      four: 4
-    },
-    four: {
-      five: 5
+      four: 4,
+      five: [1, 3, 3]
     }
   }
 };
 
 /* custom schema that validates the json structure */
-const schema = {
+const exampleSchema = {
 
   one: {
-    /* asserts that the value is equal to 'one' */
     'value is one': v => {
-      return v == 'one';
+      return v == 'hello world';
     }
   },
 
   two: {
 
-    /* complex nested structures work */
     three: {
 
-      /* define as many assertions per node as you want */
-      'value is two': v => {
-        return v == 'two';
+      four: {
+        'should be a number': v => {
+          return typeof v == 'number';
+        },
+        'should be greater than 0': v => {
+          return v > 0;
+        }
+
+        /* more tests can go here */
+
       },
 
-      'is rigth length': v => {
-        return v.length == 3;
-      }
-    },
-
-    four: {
       five: {
-        'is a number': v => {
-          return typeof v == 'number';
+        'has length three': v => {
+          return v.length == 3;
         }
       }
-    },
 
-    five: {
-
-      /* don't need worry about having duplicate keys are the same nest level */
-      five: {
-        'is greater than 4': v => {
-          return v > 4;
-        }
-      }
     }
   }
 }
 
-const schema = new Schema(schema);
+const schema = new Schema(exampleSchema);
 const result = schema.validate(test);
+
+test('validate schema', t => {
+  let schema = new Schema(schema);
+  let result = schema.validate(testObject);
+  t.ok(result.pass, 'schema validated');
+  t.end();
+});
 ```

@@ -3,58 +3,58 @@
 const Schema = require('../');
 const test = require('tape');
 
-const schema1 = {
-
-  one: {
-    'is one': v => {
-      return v == 'one';
-    }
-  },
-
+/* a json structure to test */
+const testObject = {
+  one: 'hello world',
   two: {
-    two: {
-      'is two': v => {
-        return v == 'two';
-      },
-      'is rigth length': v => {
-        return v.length == 3;
-      }
-    },
-
     three: {
-      four: {
-        'is 4': v => {
-          return v == 4;
-        }
-      }
-    },
-
-    four: {
-      five: {
-        'is greater than 4': v => {
-          return v == 5;
-        }
-      }
-    }
-  }
-}
-
-const testSchema = {
-  one: 'one',
-  two: {
-    two: 'two',
-    three: {
-      four: 4
-    },
-    four: {
-      five: 5
+      four: 4,
+      five: [1, 3, 3]
     }
   }
 };
 
+/* custom schema that validates the json structure */
+const exampleSchema = {
+
+  one: {
+    'value is one': v => {
+      return v == 'hello world';
+    }
+  },
+
+  two: {
+
+    three: {
+
+      four: {
+        'should be a number': v => {
+          return typeof v == 'number';
+        },
+        'should be greater than 0': v => {
+          return v > 0;
+        }
+
+        /* more tests can go here */
+
+      },
+
+      five: {
+        'has length three': v => {
+          return v.length == 3;
+        }
+      }
+
+    }
+  }
+}
+
+const schema = new Schema(exampleSchema);
+const result = schema.validate(test);
+
 test('validate schema', t => {
-  let schema = new Schema(schema1);
-  let result = schema.validate(testSchema);
+  let schema = new Schema(schema);
+  let result = schema.validate(testObject);
   t.ok(result.pass, 'schema validated');
   t.end();
 });
