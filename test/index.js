@@ -49,11 +49,8 @@ const exampleSchema = {
   }
 }
 
-const schema = new Schema(exampleSchema);
-const result = schema.validate(test);
-
 test('validate schema', t => {
-  let schema = new Schema(schema);
+  let schema = new Schema(exampleSchema);
   let result = schema.validate(testObject);
   t.ok(result.pass, 'schema validated');
   t.end();

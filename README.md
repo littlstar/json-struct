@@ -56,10 +56,19 @@ const exampleSchema = {
 const schema = new Schema(exampleSchema);
 const result = schema.validate(test);
 
-test('validate schema', t => {
-  let schema = new Schema(schema);
-  let result = schema.validate(testObject);
-  t.ok(result.pass, 'schema validated');
-  t.end();
-});
+console.log(result);
+```
+
+## Output
+```json
+{
+  "pass": true,
+  "success": [
+    "one value is one",
+    "four should be a number",
+    "four should be greater than 0",
+    "five has length three"
+  ],
+  "errors": []
+}
 ```
