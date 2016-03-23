@@ -1,6 +1,6 @@
 {
   "name": "json-struct",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Simple JSON schema validation",
   "main": "index.js",
   "scripts": {
