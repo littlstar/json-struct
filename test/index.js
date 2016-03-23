@@ -47,11 +47,26 @@ const exampleSchema = {
 
     }
   }
+};
+
+const exampleBadSchema = {
+  one: {
+    'fails every time :)': v => {
+      return f.m.l;
+    }
+  }
 }
 
 test('validate schema', t => {
   let schema = new Schema(exampleSchema);
   let result = schema.validate(testObject);
   t.ok(result.pass, 'schema validated');
+  t.end();
+});
+
+test('validate schema with erros', t => {
+  let schema = new Schema(exampleBadSchema);
+  let result = schema.validate(testObject);
+  t.ok(!result.pass, 'bad schema failed gracefully');
   t.end();
 });
